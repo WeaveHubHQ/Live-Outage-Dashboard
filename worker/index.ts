@@ -5,6 +5,7 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { userRoutes } from './user-routes';
 import { Env, GlobalDurableObject } from './core-utils';
+import { resetDemoData } from './demo-reset';
 
 // Need to export GlobalDurableObject to make it available in wrangler
 export { GlobalDurableObject };
@@ -49,4 +50,9 @@ app.onError((err, c) => { console.error(`[ERROR] ${err}`); return c.json({ succe
 
 console.log(`Server is running`)
 
-export default { fetch: app.fetch } satisfies ExportedHandler<Env>;
+export default {
+  fetch: app.fetch,
+  scheduled: async (_event, env, ctx) => {
+    ctx.waitUntil(resetDemoData(env));
+  },
+} satisfies ExportedHandler<Env>;

@@ -32,6 +32,10 @@ async function kvGetString(c: any, key: string, fallbackEnv?: string | undefined
   return (raw != null ? raw : (fallbackEnv ?? '')).toString();
 }
 
+async function isDemoMode(c: any): Promise<boolean> {
+  return kvGetBool(c, 'DEMO_MODE', c.env.DEMO_MODE as any);
+}
+
 function csvToList(raw: string): string[] {
   return (raw ?? '')
     .split(',')
@@ -203,6 +207,16 @@ export function userRoutes(app: Hono<{ Bindings: Env }>) {
 
   // — VENDOR STATUS (Now Dynamic & Resilient & Sorted) —
   app.get('/api/vendors/status', async (c) => {
+    if (await isDemoMode(c)) {
+      const demoStatuses: VendorStatus[] = [
+        { id: 'vendor-aws', name: 'AWS', url: 'https://status.aws.amazon.com/', status: 'Operational' },
+        { id: 'vendor-github', name: 'GitHub', url: 'https://www.githubstatus.com/', status: 'Degraded' },
+        { id: 'vendor-stripe', name: 'Stripe', url: 'https://status.stripe.com/', status: 'Operational' },
+        { id: 'vendor-slack', name: 'Slack', url: 'https://status.slack.com/', status: 'Outage' },
+      ];
+      return ok(c, demoStatuses);
+    }
+
     const { items: vendors } = await VendorEntity.list(c.env);
     const statusPromises = vendors.map(async (vendor): Promise<VendorStatus> => {
       let status: VendorStatusOption = 'Operational';
@@ -273,6 +287,10 @@ export function userRoutes(app: Hono<{ Bindings: Env }>) {
   // — ACTIVE OUTAGES (Now Dynamic)
   app.get('/api/outages/active', async (c) => {
     try {
+      if (await isDemoMode(c)) {
+        return ok(c, MOCK_OUTAGES);
+      }
+
       console.log('Step 1: Starting /api/outages/active request');
 
       const configEntity = new ServiceNowConfigEntity(c.env);
@@ -392,6 +410,10 @@ export function userRoutes(app: Hono<{ Bindings: Env }>) {
 
 // — MONITORING ALERTS
 app.get('/api/monitoring/alerts', async (c) => {
+  if (await isDemoMode(c)) {
+    return ok(c, MOCK_ALERTS);
+  }
+
   const configEntity = new SolarWindsConfigEntity(c.env);
   const config = await configEntity.getState();
 
@@ -566,6 +588,10 @@ app.get('/api/monitoring/alerts', async (c) => {
 
   // — SERVICENOW TICKETS
   app.get('/api/servicenow/tickets', async (c) => {
+    if (await isDemoMode(c)) {
+      return ok(c, MOCK_TICKETS);
+    }
+
     const configEntity = new ServiceNowConfigEntity(c.env);
     const config = await configEntity.getState();
 
@@ -673,6 +699,10 @@ app.get('/api/monitoring/alerts', async (c) => {
   // — OUTAGE HISTORY (Trends) —
   // Matches SN list filter: **Begin on Last 7 days** AND type IN (degradation,outage)
   app.get('/api/outages/history', async (c) => {
+    if (await isDemoMode(c)) {
+      return ok(c, MOCK_OUTAGE_HISTORY);
+    }
+
     const configEntity = new ServiceNowConfigEntity(c.env);
     const config = await configEntity.getState();
 
@@ -772,6 +802,38 @@ app.get('/api/monitoring/alerts', async (c) => {
 
 // — Change Control
 app.get('/api/changes/today', async (c) => {
+  if (await isDemoMode(c)) {
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0);
+    const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 0, 0);
+    const todayStartLate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 30, 0);
+    const todayEndLate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 0, 0);
+    return ok(c, [
+      {
+        id: 'CHG001234',
+        number: 'CHG001234',
+        summary: 'Database patching for auth cluster',
+        offering: 'Customer Authentication Service',
+        start: todayStart.toISOString(),
+        end: todayEnd.toISOString(),
+        state: 'Scheduled',
+        type: 'Standard',
+        url: '#',
+      },
+      {
+        id: 'CHG001235',
+        number: 'CHG001235',
+        summary: 'Edge cache rollout',
+        offering: 'API Gateway (Prod-US-East-1)',
+        start: todayStartLate.toISOString(),
+        end: todayEndLate.toISOString(),
+        state: 'Implement',
+        type: 'Emergency',
+        url: '#',
+      },
+    ]);
+  }
+
   const cfgEnt = new ServiceNowConfigEntity(c.env);
   const cfg = await cfgEnt.getState();
   if (!cfg.enabled || !cfg.instanceUrl) return bad(c, 'ServiceNow not configured.');

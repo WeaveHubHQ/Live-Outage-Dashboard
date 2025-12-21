@@ -108,9 +108,7 @@ export function HomePage() {
         </div>
       </main>
 
-      <footer className="text-center py-4 text-muted-foreground text-sm">
-        <p>Built with ❤️ at Cloudflare</p>
-      </footer>
+      <footer className="py-4" />
     </div>
   );
 }

@@ -27,6 +27,8 @@ dist-ssr
 .wrangler
 .dev.vars*
 .env.*
+wrangler.deploy.jsonc
+wrangler.jsonc
 
 data/
 .data/
