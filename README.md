@@ -1,8 +1,8 @@
-# Aegis Live Outage Dashboard
+# Live Outage Dashboard
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/J-Lazerus_Ebank/infrastructure.status-page)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/InfoSecured/Live-Outage-Dashboard&branch=main)
 
-Aegis is a sophisticated, real-time command center dashboard designed for enterprise infrastructure and security teams. It provides a unified, single-pane-of-glass view of system health by aggregating data from critical sources including ServiceNow for incident management, various vendor status pages for third-party service health, and SolarWinds for internal monitoring alerts. The dashboard is structured into modular, information-dense panels, allowing operators to quickly assess active outages, monitor vendor stability, triage alerts, and track related ServiceNow tickets.
+Live Outage Dashboard is a sophisticated, real-time command center dashboard designed for enterprise infrastructure and security teams. It provides a unified, single-pane-of-glass view of system health by aggregating data from critical sources including ServiceNow for incident management, various vendor status pages for third-party service health, and SolarWinds for internal monitoring alerts. The dashboard is structured into modular, information-dense panels, allowing operators to quickly assess active outages, monitor vendor stability, triage alerts, and track related ServiceNow tickets.
 
 ## Key Features
 
@@ -38,7 +38,7 @@ Follow these instructions to get the project up and running on your local machin
 1.  **Clone the repository:**
     ```sh
     git clone <repository-url>
-    cd aegis_outage_dashboard
+    cd live_outage_dashboard
     ```
 
 2.  **Install dependencies:**
@@ -100,7 +100,7 @@ This application is designed to be deployed to Cloudflare Pages with a Functions
 
 Alternatively, you can connect your GitHub repository to Cloudflare Pages for continuous deployment.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/J-Lazerus_Ebank/infrastructure.status-page)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/InfoSecured/Live-Outage-Dashboard&branch=main)
 
 ## License
 
