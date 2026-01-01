@@ -17,15 +17,21 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+.eslintcache
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
+# Build and test outputs
+coverage/
+*.tsbuildinfo
+
 # wrangler files
 .wrangler
 .dev.vars*
+.env
 .env.*
 wrangler.deploy.jsonc
 wrangler.jsonc

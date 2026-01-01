@@ -102,6 +102,8 @@ Alternatively, you can connect your GitHub repository to Cloudflare Pages for co
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/InfoSecured/Live-Outage-Dashboard&branch=main)
 
+Come see our other apps and integrations at [WeaveHub](https://weavehub.app).
+
 ## License
 
 This project is licensed under the MIT License.
