@@ -1,6 +1,6 @@
 # Live Outage Dashboard
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/InfoSecured/Live-Outage-Dashboard&branch=main)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/WeaveHubHQ/Live-Outage-Dashboard&branch=main)
 
 Live Outage Dashboard is a sophisticated, real-time command center dashboard designed for enterprise infrastructure and security teams. It provides a unified, single-pane-of-glass view of system health by aggregating data from critical sources including ServiceNow for incident management, various vendor status pages for third-party service health, and SolarWinds for internal monitoring alerts. The dashboard is structured into modular, information-dense panels, allowing operators to quickly assess active outages, monitor vendor stability, triage alerts, and track related ServiceNow tickets.
 
@@ -100,7 +100,7 @@ This application is designed to be deployed to Cloudflare Pages with a Functions
 
 Alternatively, you can connect your GitHub repository to Cloudflare Pages for continuous deployment.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/InfoSecured/Live-Outage-Dashboard&branch=main)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/WeaveHubHQ/Live-Outage-Dashboard&branch=main)
 
 Come see our other apps and integrations at [WeaveHub](https://weavehub.app).
 
